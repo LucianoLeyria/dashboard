@@ -1,12 +1,17 @@
-import { useState } from 'react';
 import './App.css';
+import { Menu } from './components/Menu/Menu';
+import { Routes, Route } from 'react-router-dom';
+import { Productos } from './components/Productos/Productos';
+import { Categorias } from './components/Categorias/Categorias';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className='App'>
-      <h1>asd</h1>
+      <Menu />
+      <Routes>
+        <Route path='/categorias' element={<Categorias />} />
+        <Route path='/productos' element={<Productos />} />
+      </Routes>
     </div>
   );
 }
