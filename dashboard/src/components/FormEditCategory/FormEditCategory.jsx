@@ -3,16 +3,16 @@ import { useContext } from 'react';
 import { GlobalContext } from '../../GlobalContext/GlobalContext';
 import Swal from 'sweetalert2';
 
-export const FormCategoria = () => {
-  const { addCategories } = useContext(GlobalContext);
+export const FormEditCategory = ({ id, title, subtitle }) => {
+  const { modifyCategories } = useContext(GlobalContext);
   const [categoria, setCategoria] = useState({
-    titulo: '',
-    subtitulo: '',
+    titulo: title,
+    subtitulo: subtitle,
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addCategories(categoria);
+    modifyCategories(id, categoria);
     console.log('CAT', categoria);
     Swal.fire({
       title: 'Exitoso!',

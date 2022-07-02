@@ -1,28 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CategoriaCard } from '../CategoriaCard/CategoriaCard';
 import { FormCategoria } from '../FormCategoria/FormCategoria';
 import { Modal } from '../Modal/Modal';
+import { useContext } from 'react';
+import { GlobalContext } from '../../GlobalContext/GlobalContext';
+import { useNavigate } from 'react-router-dom';
 
 export const Categorias = () => {
+  const { categories, setCategories } = useContext(GlobalContext);
   const [modal, setModal] = useState(false);
-
+  const navigate = useNavigate();
   const handleClick = () => {
     setModal(true);
   };
 
-  const categorias = [
-    {
-      title: 'promos',
-      subtitle: 'las mejores promos',
-      image:
-        'https://st.depositphotos.com/1186248/4216/i/450/depositphotos_42167223-stock-photo-promo.jpg',
-    },
-    {
-      title: 'hamburguesas',
-      subtitle: 'las mejores hamburguesas',
-      image: 'https://www.clarin.com/img/2021/06/17/LC25eDtCT_1200x630__1.jpg',
-    },
-  ];
+  useEffect(() => {
+    if (!window.localStorage.getItem('password')) navigate('/ingresar');
+    setCategories();
+  }, []);
 
   return (
     <div>
@@ -36,13 +31,13 @@ export const Categorias = () => {
       ) : null}
       <div>
         {' '}
-        {categorias.map((c) => {
+        {categories.map((c) => {
           return (
             <CategoriaCard
-              key={c.title}
-              title={c.title}
-              subtitle={c.subtitle}
-              image={c.image}
+              id={c.id}
+              key={c.titulo}
+              title={c.titulo}
+              subtitle={c.subtitulo}
             />
           );
         })}

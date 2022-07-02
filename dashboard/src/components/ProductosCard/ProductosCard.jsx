@@ -1,19 +1,26 @@
-import React, { useState } from 'react';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { AiFillEdit } from 'react-icons/ai';
 import { GlobalContext } from '../../GlobalContext/GlobalContext';
 import Swal from 'sweetalert2';
 import { Modal } from '../Modal/Modal';
-import { FormEditCategory } from '../FormEditCategory/FormEditCategory';
+import { FormEditProduct } from '../FormEditProduct/FormEditProduct';
+import '../ProductosCard/ProductosCard.css';
 
-export const CategoriaCard = ({ title, subtitle, id }) => {
-  const { deleteCategories } = useContext(GlobalContext);
+export const ProductosCard = ({
+  id,
+  title,
+  description,
+  image,
+  price,
+  categoryId,
+}) => {
+  const { deleteProducts } = useContext(GlobalContext);
   const [modal, setModal] = useState(false);
 
   const handleClick = () => {
     Swal.fire({
-      title: '¿Quieres eliminar la categoría?',
+      title: '¿Quieres eliminar el producto?',
       showDenyButton: true,
       confirmButtonText: 'Yes',
       denyButtonText: 'Cancel',
@@ -24,7 +31,7 @@ export const CategoriaCard = ({ title, subtitle, id }) => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteCategories(id);
+        deleteProducts(id);
         Swal.fire('Exitoso', '', 'success');
       }
     });
@@ -37,7 +44,9 @@ export const CategoriaCard = ({ title, subtitle, id }) => {
   return (
     <div>
       <h1>{title}</h1>
-      <h2>{subtitle}</h2>
+      <h2>{description}</h2>
+      <h3>${price}</h3>
+      <img className='img' src={image} alt='' />
       <button onClick={handleClick}>
         <RiDeleteBinLine />
       </button>
@@ -46,7 +55,15 @@ export const CategoriaCard = ({ title, subtitle, id }) => {
       </button>
       {modal ? (
         <Modal setShowModal={setModal}>
-          <FormEditCategory id={id} title={title} subtitle={subtitle} />
+          <FormEditProduct
+            key={id}
+            id={id}
+            title={title}
+            description={description}
+            price={price}
+            image={image}
+            categoryId={categoryId}
+          />
         </Modal>
       ) : null}
     </div>
