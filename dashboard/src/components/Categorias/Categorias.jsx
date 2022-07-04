@@ -5,6 +5,7 @@ import { Modal } from '../Modal/Modal';
 import { useContext } from 'react';
 import { GlobalContext } from '../../GlobalContext/GlobalContext';
 import { useNavigate } from 'react-router-dom';
+import styles from './Categorias.module.scss';
 
 export const Categorias = () => {
   const { categories, setCategories } = useContext(GlobalContext);
@@ -13,24 +14,23 @@ export const Categorias = () => {
   const handleClick = () => {
     setModal(true);
   };
-
   useEffect(() => {
     if (!window.localStorage.getItem('password')) navigate('/ingresar');
     setCategories();
   }, []);
 
   return (
-    <div>
-      <h1>Categorias</h1>
-      <button onClick={handleClick}>Agregar nueva categoria</button>
+    <div className={styles.categorias}>
+      <h2>Categorias</h2>
+      <button className={styles.button} onClick={handleClick}>
+        Agregar nueva categoria
+      </button>
       {modal ? (
         <Modal setShowModal={setModal}>
-          {' '}
-          <FormCategoria />{' '}
+          <FormCategoria />
         </Modal>
       ) : null}
-      <div>
-        {' '}
+      <div className={styles.categoria}>
         {categories.map((c) => {
           return (
             <CategoriaCard

@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { GlobalContext } from '../../GlobalContext/GlobalContext';
 import Swal from 'sweetalert2';
 import { subirImagen } from '../../Fetchs';
+import styles from './ProductForm.module.scss';
 
 export const ProductForm = () => {
   const { addProducts, categories } = useContext(GlobalContext);
@@ -37,59 +38,79 @@ export const ProductForm = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} encType='multipart/form-data'>
-        <label>Título de producto</label>
+    <form
+      className={styles.form}
+      onSubmit={handleSubmit}
+      encType="multipart/form-data"
+    >
+      <label className={styles.label}>
+        Título de producto
         <input
-          type='text'
+          type="text"
           onChange={handleChange}
-          name='titulo'
+          name="titulo"
           value={producto.titulo}
+          className={styles.input}
         />
-        <label>Descripción</label>
+      </label>
+      <label className={styles.label}>
+        Descripción
         <input
-          type='text'
+          type="text"
           onChange={handleChange}
-          name='descripcion'
+          name="descripcion"
           value={producto.descripcion}
+          className={styles.input}
         />
-        <label>Precio</label>
+      </label>
+      <label className={styles.label}>
+        Precio
         <input
-          type='number'
+          type="number"
           onChange={handleChange}
-          name='precio'
+          name="precio"
           value={producto.precio}
+          className={styles.input}
         />
-        <select onChange={handleChange} name='categoriaId' id='categorias'>
-          <option value='-1'>Todas</option>
-          {categories.map((c) => {
-            return (
-              <option value={c.id} key={c.id}>
-                {c.titulo}
-              </option>
-            );
-          })}
-        </select>
-        <label>Imagen</label>
+      </label>
+      <select
+        className={styles.select}
+        onChange={handleChange}
+        name="categoriaId"
+        id="categorias"
+      >
+        <option value="-1">Todas</option>
+        {categories.map((c) => {
+          return (
+            <option value={c.id} key={c.id}>
+              {c.titulo}
+            </option>
+          );
+        })}
+      </select>
+      <label>
+        Imagen
         <input
           ref={inputImage}
-          type='file'
-          name='imagen'
+          type="file"
+          name="imagen"
           onChange={handleChange}
           value={producto.imagen}
+          className={styles.inputFile}
         />
-        <button
-          disabled={
-            !producto.titulo ||
-            !producto.descripcion ||
-            !producto.precio ||
-            !producto.imagen ||
-            !producto.categoriaId
-          }
-        >
-          Enviar
-        </button>
-      </form>
-    </div>
+      </label>
+      <button
+        className={styles.button}
+        disabled={
+          !producto.titulo ||
+          !producto.descripcion ||
+          !producto.precio ||
+          !producto.imagen ||
+          !producto.categoriaId
+        }
+      >
+        Enviar
+      </button>
+    </form>
   );
 };

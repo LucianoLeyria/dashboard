@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useContext } from 'react';
 import { GlobalContext } from '../../GlobalContext/GlobalContext';
 import Swal from 'sweetalert2';
+import styles from './FormEditCategory.module.scss';
 
 export const FormEditCategory = ({ id, title, subtitle }) => {
   const { modifyCategories } = useContext(GlobalContext);
@@ -30,26 +31,34 @@ export const FormEditCategory = ({ id, title, subtitle }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>Título de categoría </label>
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <label className={styles.label}>
+        Título de categoría
         <input
-          type='text'
+          type="text"
           onChange={handleChange}
-          name='titulo'
+          name="titulo"
           value={categoria.titulo}
+          className={styles.input}
         />
-        <label>Subtitulo</label>
+      </label>
+      <label className={styles.label}>
+        Subtitulo
         <input
-          type='text'
+          type="text"
           onChange={handleChange}
-          name='subtitulo'
+          name="subtitulo"
           value={categoria.subtitulo}
+          className={styles.input}
         />
+      </label>
 
-        {!categoria.titulo && <p>Necesitas ingresar un título</p>}
-        <button disabled={!categoria.titulo}>Enviar</button>
-      </form>
-    </div>
+      {!categoria.titulo && (
+        <p className={styles.warning}>Necesitas ingresar un título</p>
+      )}
+      <button className={styles.button} disabled={!categoria.titulo}>
+        Enviar
+      </button>
+    </form>
   );
 };

@@ -5,6 +5,7 @@ import { ProductForm } from '../ProductForm/ProductForm';
 import { ProductosCard } from '../ProductosCard/ProductosCard';
 import { filterOptions } from './service';
 import { useNavigate } from 'react-router-dom';
+import styles from './Productos.module.scss';
 
 export const Productos = () => {
   const { getProducts, setCategories, categories, products } =
@@ -29,26 +30,35 @@ export const Productos = () => {
   };
 
   return (
-    <div>
-      <h1>Productos</h1>
-      <button onClick={handleClick}>Agregar nuevo producto</button>
-      <label htmlFor='categorias'>Categorias</label>
-      <select onChange={handleChange} name='categorias' id='categorias'>
-        <option value='-1'>Todas</option>
-        {categories.map((c) => {
-          return (
-            <option value={c.id} key={c.id}>
-              {c.titulo}
-            </option>
-          );
-        })}
-      </select>
+    <section className={styles.productos}>
+      <h2 className={styles.productos_title}>Productos</h2>
+      <button className={styles.button} onClick={handleClick}>
+        Agregar nuevo producto
+      </button>
+      <label className={styles.select} htmlFor="categorias">
+        Categorias
+        <select
+          className={styles.input}
+          onChange={handleChange}
+          name="categorias"
+          id="categorias"
+        >
+          <option value="-1">Todas</option>
+          {categories.map((c) => {
+            return (
+              <option value={c.id} key={c.id}>
+                {c.titulo}
+              </option>
+            );
+          })}
+        </select>
+      </label>
       {modal ? (
         <Modal setShowModal={setModal}>
           <ProductForm />
         </Modal>
       ) : null}
-      <div>
+      <div className={styles.producto}>
         {filterOptions(select, products)?.map((p) => {
           return (
             <ProductosCard
@@ -63,6 +73,6 @@ export const Productos = () => {
           );
         })}
       </div>
-    </div>
+    </section>
   );
 };
