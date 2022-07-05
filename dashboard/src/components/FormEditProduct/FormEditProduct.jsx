@@ -40,7 +40,6 @@ export const FormEditProduct = ({
       [e.target.name]: e.target.value,
     });
   };
-  console.log('IMG', producto.imagen);
 
   const handleUploadImage = async () => {
     const res = await subirImagen(inputImage.current.files[0]);

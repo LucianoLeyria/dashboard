@@ -13,7 +13,7 @@ export const FormCategoria = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addCategories(categoria);
-    console.log('CAT', categoria);
+
     Swal.fire({
       title: 'Exitoso!',
       text: 'Haz click para continuar',

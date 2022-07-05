@@ -7,7 +7,7 @@ export const subirImagen = async (imagen) => {
     body: data,
   });
   let imagenRes = await res.json();
-  console.log('CL DEL FETCH', imagenRes);
+
   return imagenRes;
 };
 
@@ -71,7 +71,7 @@ export const agregarProductos = async (producto) => {
     body: JSON.stringify(producto),
   });
   let productoRes = await res.json();
-  console.log('PRODUCTOAGREGAR', productoRes);
+
   return productoRes;
 };
 
@@ -107,6 +107,6 @@ export const validarPassword = async (password) => {
     body: JSON.stringify({ password }),
   });
   let loginRes = await res.json();
-  console.log('PRODUCTOAGREGAR', loginRes);
+
   return loginRes;
 };

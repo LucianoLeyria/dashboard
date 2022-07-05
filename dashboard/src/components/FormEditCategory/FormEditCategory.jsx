@@ -13,7 +13,7 @@ export const FormEditCategory = ({ id, title, subtitle }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     modifyCategories(id, categoria);
-    console.log('CAT', categoria);
+
     Swal.fire({
       title: 'Exitoso!',
       text: 'Haz click para continuar',
