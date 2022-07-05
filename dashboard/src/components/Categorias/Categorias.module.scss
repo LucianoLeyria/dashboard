@@ -1,0 +1,25 @@
+.categorias {
+  margin: 50px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  max-width: 1024px;
+  .categoria {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+  }
+  .button {
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    padding: 1rem;
+    font-weight: bold;
+    color: white;
+    background: #0d6efd;
+    border-radius: 10px;
+  }
+}

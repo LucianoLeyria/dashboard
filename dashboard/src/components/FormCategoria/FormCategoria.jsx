@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useContext } from 'react';
 import { GlobalContext } from '../../GlobalContext/GlobalContext';
+import styles from './FormCategoria.module.scss';
 import Swal from 'sweetalert2';
 
 export const FormCategoria = () => {
@@ -30,26 +31,27 @@ export const FormCategoria = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>Título de categoría </label>
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <label>
+        Título de categoría
         <input
-          type='text'
+          type="text"
           onChange={handleChange}
-          name='titulo'
+          name="titulo"
           value={categoria.titulo}
         />
-        <label>Subtitulo</label>
+      </label>
+      <label>
+        Subtitulo
         <input
-          type='text'
+          type="text"
           onChange={handleChange}
-          name='subtitulo'
+          name="subtitulo"
           value={categoria.subtitulo}
         />
-
-        {!categoria.titulo && <p>Necesitas ingresar un título</p>}
-        <button disabled={!categoria.titulo}>Enviar</button>
-      </form>
-    </div>
+      </label>
+      {!categoria.titulo && <p>Necesitas ingresar un título</p>}
+      <button disabled={!categoria.titulo}>Enviar</button>
+    </form>
   );
 };

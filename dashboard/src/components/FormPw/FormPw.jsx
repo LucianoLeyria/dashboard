@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { validarPassword } from '../../Fetchs';
 import Swal from 'sweetalert2';
+import styles from './FormPw.module.scss';
 import { useNavigate } from 'react-router-dom';
 
 export const FormPw = () => {
   const [password, setPassword] = useState('');
-  const defaultPassword = import.meta.env.VITE_APP_PW;
   const navigate = useNavigate();
   const handleChange = (e) => {
     setPassword(e.target.value);
@@ -28,18 +28,19 @@ export const FormPw = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='contraseña'>Ingrese contraseña para acceder</label>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <label htmlFor="contraseña" className={styles.form_label}>
+        Ingrese contraseña para acceder
         <input
-          type='text'
+          type="text"
           onChange={handleChange}
-          name='contraseña'
-          id='contraseña'
+          name="contraseña"
+          id="contraseña"
           value={password}
+          className={styles.form_input}
         />
-        <button>Ingresar</button>
-      </form>
-    </div>
+      </label>
+      <button className={styles.form_button}>Ingresar</button>
+    </form>
   );
 };

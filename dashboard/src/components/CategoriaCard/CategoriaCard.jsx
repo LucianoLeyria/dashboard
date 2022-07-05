@@ -6,6 +6,7 @@ import { GlobalContext } from '../../GlobalContext/GlobalContext';
 import Swal from 'sweetalert2';
 import { Modal } from '../Modal/Modal';
 import { FormEditCategory } from '../FormEditCategory/FormEditCategory';
+import styles from './CategoriaCard.module.scss';
 
 export const CategoriaCard = ({ title, subtitle, id }) => {
   const { deleteCategories } = useContext(GlobalContext);
@@ -15,8 +16,8 @@ export const CategoriaCard = ({ title, subtitle, id }) => {
     Swal.fire({
       title: '¿Quieres eliminar la categoría?',
       showDenyButton: true,
-      confirmButtonText: 'Yes',
-      denyButtonText: 'Cancel',
+      confirmButtonText: 'Si',
+      denyButtonText: 'No',
       customClass: {
         actions: 'my-actions',
         confirmButton: 'order-2',
@@ -35,15 +36,19 @@ export const CategoriaCard = ({ title, subtitle, id }) => {
   };
 
   return (
-    <div>
-      <h1>{title}</h1>
-      <h2>{subtitle}</h2>
-      <button onClick={handleClick}>
-        <RiDeleteBinLine />
-      </button>
-      <button>
-        <AiFillEdit onClick={handleEditClick} />
-      </button>
+    <div className={styles.categoria}>
+      <div className={styles.editarEliminar}>
+        <button onClick={handleClick} className={styles.borrar}>
+          <RiDeleteBinLine />
+        </button>
+        <button onClick={handleEditClick} className={styles.editar}>
+          <AiFillEdit />
+        </button>
+      </div>
+      <div>
+        <h2>{title}</h2>
+        <p>{subtitle}</p>
+      </div>
       {modal ? (
         <Modal setShowModal={setModal}>
           <FormEditCategory id={id} title={title} subtitle={subtitle} />
